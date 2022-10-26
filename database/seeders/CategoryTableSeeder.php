@@ -14,7 +14,7 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categories')->truncate();
+       // DB::table('categories')->truncate();
         $id = DB::table('categories')->insertGetId([
             'name' => 'Elektronik',
             'slug' => 'elektronik'

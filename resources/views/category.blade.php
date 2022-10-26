@@ -14,9 +14,17 @@
                     <div class="panel-body">
                         <h3>Alt Kategoriler</h3>
                         <div class="list-group categories">
-                            @foreach($sub_category as $data)
-                                <a href="{{route('category', $data->slug)}}" class="list-group-item"><i class="fa fa-arrow-circle-right"></i> {{$data->name}}</a>
-                            @endforeach
+                            @if(count($sub_category) > 0)
+                                @foreach($sub_category as $data)
+                                    <a href="{{route('category', $data->slug)}}" class="list-group-item"><i class="fa fa-arrow-circle-right"></i> {{$data->name}}</a>
+                                @endforeach
+                            @else
+                                <div class="alert alert-danger">
+                                    <p>
+                                        Bu kategoride alt kategori bulunmamaktadır
+                                    </p>
+                                </div>
+                            @endif
                         </div>
                         <h3>Fiyat Aralığı</h3>
                         <form>
@@ -40,35 +48,27 @@
             </div>
             <div class="col-md-9">
                 <div class="products bg-content">
-                    Sırala
-                    <a href="#" class="btn btn-default">Çok Satanlar</a>
-                    <a href="#" class="btn btn-default">Yeni Ürünler</a>
-                    <hr>
                     <div class="row">
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="/img/indir.jpg"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                            <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="/img/indir.jpg"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                            <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="/img/indir.jpg"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                            <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="/img/indir.jpg"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                            <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
-                        </div>
+                        @if(count($products)>0)
+                            Sırala
+                            <a href="#" class="btn btn-default">Çok Satanlar</a>
+                            <a href="#" class="btn btn-default">Yeni Ürünler</a>
+                            <hr>
+                            @foreach($products as $product)
+                                <div class="col-md-3 product">
+                                    <a href="{{route('product',$product->slug)}}"><img src="/img/indir.jpg"></a>
+                                    <p><a href="{{route('product',$product->slug)}}">{{$product->name}}</a></p>
+                                    <p class="price">{{$product->price}} ₺</p>
+                                    <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="alert alert-danger">
+                                <p>
+                                    Bu kategoride ürün bulunmamaktadır
+                                </p>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

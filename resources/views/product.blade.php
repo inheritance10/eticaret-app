@@ -1,12 +1,14 @@
 @extends('layouts.master')
-@section('title','Product')
+@section('title', $productDetail->name)
 
 @section('content')
     <div class="container">
         <ol class="breadcrumb">
-            <li><a href="#">Anasayfa</a></li>
-            <li><a href="#">Kategori</a></li>
-            <li class="active">Kategori</li>
+            <li><a href="{{route('mainpage')}}">Anasayfa</a></li>
+            @foreach($categories as $category)
+                <li><a href="{{route('category',$category->slug)}}">{{$category->name}}</a></li>
+            @endforeach
+            <li class="active">{{$productDetail->name}}</li>
         </ol>
         <div class="bg-content">
             <div class="row">
@@ -17,17 +19,11 @@
                         <div class="col-xs-3">
                             <a href="#" class="thumbnail"><img src="/img/indir.jpg"></a>
                         </div>
-                        <div class="col-xs-3">
-                            <a href="#" class="thumbnail"><img src="/img/indir.jpg"></a>
-                        </div>
-                        <div class="col-xs-3">
-                            <a href="#" class="thumbnail"><img src="/img/indir.jpg"></a>
-                        </div>
                     </div>
                 </div>
                 <div class="col-md-7">
-                    <h1>Ürün adı</h1>
-                    <p class="price">129 ₺</p>
+                    <h1>{{$productDetail->name}}</h1>
+                    <p class="price">{{$productDetail->price}} ₺</p>
                     <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
                 </div>
             </div>
@@ -38,7 +34,7 @@
                     <li role="presentation"><a href="#t2" data-toggle="tab">Yorumlar</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="t1">t1</div>
+                    <div role="tabpanel" class="tab-pane active" id="t1">{{$productDetail->description}}</div>
                     <div role="tabpanel" class="tab-pane" id="t2">t2</div>
                 </div>
             </div>
